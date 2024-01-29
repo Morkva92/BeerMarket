@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beer Market</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #f00;
+        }
+        nav {
+            background-color: #f00;
+            color: #fff;
+            padding: 30px;
+            text-align: center;
+            overflow: hidden; /* Добавлено */
+        }
+        nav img {
+            float: left; /* Добавлено */
+            margin-right: 40px; /* Добавлено */
+            margin-left: 100px;
+            filter: brightness(150%);
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            float: right; /* Добавлено */
+        }
+        nav ul li {
+            display: inline-block;
+            margin-left: 20px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        h1, p {
+            text-align: center;
+        }
+        a {
+            display: block;
+            width: 150px;
+            padding: 10px;
+            margin: 0 auto;
+            text-align: center;
+            text-decoration: none;
+            background-color: #f00;
+            color: #fff;
+            border-radius: 5px;
+        }
+        form {
+            text-align: center;
+            margin-top: 50px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #f00;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            width: 150px;
+            padding: 10px;
+            background-color: #f00;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<nav>
+
+    <img src="/logo.png" alt="Beer Market" width="299" height="51">
+
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+<h1>Welcome to Beer Market!</h1>
+<p>This is the main page of your Beer Market application.</p>
+<form action="/login" method="post">
+    <div>
+        <label for="login">Login:</label><br>
+        <input type="text" id="login" name="login"><br>
+    </div>
+    <div>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password"><br>
+    </div>
+    <div>
+        <input type="submit" value="Login">
+    </div>
+</form>
+</body>
+</html>

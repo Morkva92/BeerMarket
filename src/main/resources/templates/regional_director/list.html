@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Список Региональных Деректоров</title>
+</head>
+<body>
+<h2>Список Региональных Деректоров</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Отчество</th>
+        <th>Логин</th>
+        <th>Пароль</th>
+        <th>Email</th>
+        <th>Телефон</th>
+        <th>Регион</th>
+        <th>Должность</th>
+        <th>Дата рождения</th>
+
+        <!-- Add more columns if needed -->
+        <th>Actions</th>
+    </tr>
+    <tr th:each="director : ${regionalDirectors}">
+        <td th:text="${director.id}"></td>
+        <td th:text="${director.firstName}"></td>
+        <td th:text="${director.lastName}"></td>
+        <td th:text="${director.middleName}"></td>
+        <td th:text="${director.login}"></td>
+        <td th:text="${director.password}"></td>
+        <td th:text="${director.email}"></td>
+        <td th:text="${director.phone}"></td>
+        <td th:text="${director.region.getDisplayName()}"></td>
+        <td th:text="${director.role.getDisplayName()}"></td>
+        <td th:text="${director.birthDate}"></td>
+        <!-- Add more columns if needed -->
+        <td>
+            <a th:href="@{/regionalDirectors/edit/{id}(id=${director.id})}">Edit</a> |
+            <a th:href="@{/regionalDirectors/delete/{id}(id=${director.id})}">Delete</a>
+        </td>
+    </tr>
+</table>
+<a href="/regionalDirectors/create">Создать нового Деректора</a>
+</body>
+</html>

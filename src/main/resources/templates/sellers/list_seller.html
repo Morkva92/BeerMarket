@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Список Продавцов</title>
+</head>
+<body>
+<h2>Список Продавцов</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Отчество</th>
+        <!-- Добавьте другие заголовки столбцов, если нужно -->
+        <th>Действия</th>
+    </tr>
+    <tr th:each="seller : ${sellers}">
+        <td th:text="${seller.id}"></td>
+        <td th:text="${seller.firstName}"></td>
+        <td th:text="${seller.lastName}"></td>
+        <td th:text="${seller.middleName}"></td>
+        <!-- Добавьте другие поля, если нужно -->
+        <td>
+            <a th:href="@{/sellers/edit/{id}(id=${seller.id})}">Изменить</a> |
+            <a th:href="@{/sellers/delete/{id}(id=${seller.id})}">Удалить</a>
+        </td>
+    </tr>
+</table>
+<a href="/sellers/create">Создать нового продавца</a>
+</body>
+</html>

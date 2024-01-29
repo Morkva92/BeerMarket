@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет директора</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        .manager {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #f0f0f0;
+        }
+
+        .seller {
+            margin-left: 20px;
+            padding-left: 10px;
+            border-left: 1px solid #ccc;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="employees">
+        <h2>Подчиненные менеджеры</h2>
+        <div class="manager" th:each="manager : ${regionalDirector.territorialManagers}">
+            <h3 th:text="${manager.firstName + ' ' + manager.lastName}">Имя менеджера</h3>
+            <div class="sellers">
+                <h4>Продавцы:</h4>
+                <div class="seller" th:each="seller : ${manager.sellers}">
+                    <h5 th:text="${seller.firstName + ' ' + seller.lastName}">Имя продавца</h5>
+                    <!-- Дополнительная информация о продавце -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

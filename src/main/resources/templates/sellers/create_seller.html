@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Создать Продавца</title>
+</head>
+<body>
+<h2>Создать Продавца</h2>
+<form th:action="@{/sellers/create}" th:object="${seller}" method="post">
+    <label>Имя: <input type="text" th:field="*{firstName}"/></label><br/>
+    <label>Фамилия: <input type="text" th:field="*{lastName}"/></label><br/>
+    <label>Отчество: <input type="text" th:field="*{middleName}"/></label><br/>
+    <!-- Добавьте другие поля, соответствующие вашей модели продавца -->
+    <button type="submit">Создать</button>
+</form>
+<a href="/sellers/list">Вернуться к списку</a>
+</body>
+</html>
