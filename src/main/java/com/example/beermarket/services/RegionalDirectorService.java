@@ -49,22 +49,37 @@ public class RegionalDirectorService {
         regionalDirectorRepository.deleteById(id);
     }
 
-    public List<RegionalDirector> findRegionalDirectorsByName(String name) {
-        return regionalDirectorRepository.findByFirstName(name);
-    }
+    public void assignTerritorialManager(Long regionalDirectorId, Long territorialManagerId) {
+        Optional<RegionalDirector> regionalDirectorOptional = regionalDirectorRepository.findById(regionalDirectorId);
+        Optional<TerritorialManager> territorialManagerOptional = territorialManagerRepository.findById(territorialManagerId);
 
-    public Optional<RegionalDirector> getRegionalDirector() {
-        // Получаем список всех директоров
-        List<RegionalDirector> directors = regionalDirectorRepository.findAll();
+        if (regionalDirectorOptional.isPresent() && territorialManagerOptional.isPresent()) {
+            RegionalDirector regionalDirector = regionalDirectorOptional.get();
+            TerritorialManager territorialManager = territorialManagerOptional.get();
 
-        // Если список не пустой, возвращаем первого директора из списка
-        if (!directors.isEmpty()) {
-            return Optional.of(directors.get(0));
+            regionalDirector.setTerritorialManager(territorialManager);
+            regionalDirectorRepository.save(regionalDirector);
         } else {
-            // Возвращаем пустой Optional, если список пустой
-            return Optional.empty();
+            throw new EntityNotFoundException("Региональный директор или территориальный менеджер не найден");
         }
     }
+
+    public void removeTerritorialManagerFromDirector(Long directorId, Long managerId) {
+        Optional<RegionalDirector> regionalDirectorOptional = regionalDirectorRepository.findById(directorId);
+        Optional<TerritorialManager> territorialManagerOptional = territorialManagerRepository.findById(managerId);
+
+        if (regionalDirectorOptional.isPresent() && territorialManagerOptional.isPresent()) {
+            RegionalDirector regionalDirector = regionalDirectorOptional.get();
+            TerritorialManager territorialManager = territorialManagerOptional.get();
+
+            regionalDirector.removeTerritorialManager(territorialManager);
+            regionalDirectorRepository.save(regionalDirector);
+        } else {
+            throw new EntityNotFoundException("Региональный директор или территориальный менеджер не найден");
+        }
+    }
+
+
 
 }
 

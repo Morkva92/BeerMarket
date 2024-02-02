@@ -33,14 +33,8 @@ public class Shop {
     @JoinColumn(name = "territorial_manager_id")
     private TerritorialManager territorialManager;
 
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "shop")
     private List<Seller> sellers;
-
-    public Shop(String name, String address, String region) {
-        this.name = name;
-        this.address = address;
-        this.region = Region.valueOf(region);
-    }
 
 
     public void addSeller(Seller seller) {

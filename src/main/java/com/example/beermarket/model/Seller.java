@@ -6,6 +6,7 @@ import com.example.beermarket.role.SellerStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -27,8 +28,10 @@ public class Seller {
     private String middleName;
 
     @Enumerated(EnumType.STRING)
-    private Region region;;
+    private Region region;
+
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
     @Lob
     private byte[] photo;

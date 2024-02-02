@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Создать Регионального Деректора</title>
+    <title>Создать Регионального Директора</title>
 </head>
 <body>
-<h2>Создать Регионального Деректора</h2>
+<h2>Создать Регионального Директора</h2>
 <form th:action="@{/regionalDirectors/create}" th:object="${regionalDirector}" method="post">
     <label>Имя: <input type="text" th:field="*{firstName}"/></label><br/>
     <label>Фамилия: <input type="text" th:field="*{lastName}"/></label><br/>
@@ -14,6 +14,7 @@
     <label>Password: <input type="password" th:field="*{password}"/></label><br/>
     <label>Email: <input type="email" th:field="*{email}"/></label><br/>
     <label>Телефон: <input type="text" th:field="*{phone}"/></label><br/>
+
     <label>Регион:
         <select th:field="*{region}">
             <option value="REGION1">Северный регион</option>
@@ -30,11 +31,11 @@
             <option value="SELLER">Продавец</option>
             <option value="REGIONAL_DIRECTOR">Региональный директор</option>
             <option value="TERRITORIAL_MANAGER">Территориальный менеджер</option>
-
             <!-- Добавьте другие варианты регионов -->
         </select>
     </label><br/>
     <label>Дата рождения: <input type="date" th:field="*{birthDate}" /></label><br/>
+
 
     <button type="submit">Создать</button>
 </form>

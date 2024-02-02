@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class RegionalDirector {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String login;
@@ -41,41 +41,24 @@ public class RegionalDirector {
     private String email;
     private String phone;
 
-    @OneToMany(mappedBy = "regionalDirector", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "regionalDirector", fetch = FetchType.LAZY)
     private List<TerritorialManager> territorialManagers;
 
-    @OneToMany(mappedBy = "regionalDirector", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "regionalDirector")
     private List<Shop> shops;
 
-
-
-
-    public void addTerritorialManager(TerritorialManager territorialManager) {
+    public void setTerritorialManager(TerritorialManager territorialManager) {
         if (territorialManagers == null) {
             territorialManagers = new ArrayList<>();
         }
         territorialManagers.add(territorialManager);
         territorialManager.setRegionalDirector(this);
     }
-
     public void removeTerritorialManager(TerritorialManager territorialManager) {
         if (territorialManagers != null) {
             territorialManagers.remove(territorialManager);
             territorialManager.setRegionalDirector(null);
-        }
-    }
-    public void addShop(Shop shop) {
-        if (shops == null) {
-            shops = new ArrayList<>();
-        }
-        shops.add(shop);
-        shop.setRegionalDirector(this);
-    }
-
-    public void removeShop(Shop shop) {
-        if (shops != null) {
-            shops.remove(shop);
-            shop.setRegionalDirector(null);
         }
     }
 

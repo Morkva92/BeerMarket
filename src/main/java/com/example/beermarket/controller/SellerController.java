@@ -16,7 +16,7 @@ public class SellerController {
 
     private final SellerService sellerService;
 
-    @Autowired
+
     public SellerController(SellerService sellerService) {
         this.sellerService = sellerService;
     }

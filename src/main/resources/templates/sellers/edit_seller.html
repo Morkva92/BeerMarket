@@ -2,16 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Изменить Продавца</title>
+    <title>Редактировать Продавца</title>
 </head>
 <body>
-<h2>Изменить Данные Продавца</h2>
+<h2>Редактировать Продавца</h2>
 <form th:action="@{/sellers/edit/{id}(id=${seller.id})}" th:object="${seller}" method="post">
     <input type="hidden" th:field="*{id}"/>
     <label>Имя: <input type="text" th:field="*{firstName}"/></label><br/>
     <label>Фамилия: <input type="text" th:field="*{lastName}"/></label><br/>
     <label>Отчество: <input type="text" th:field="*{middleName}"/></label><br/>
-    <!-- Добавьте другие поля, соответствующие вашей модели продавца -->
+    <label>Login: <input type="text" th:field="*{login}"/></label><br/>
+    <label>Password: <input type="password" th:field="*{password}"/></label><br/>
+    <label>Email: <input type="email" th:field="*{email}"/></label><br/>
+    <label>Телефон: <input type="text" th:field="*{phone}"/></label><br/>
+    <label>Регион:
+        <select th:field="*{region}">
+            <option value="REGION1">Северный регион</option>
+            <option value="REGION2">Южный регион</option>
+            <!-- Добавьте другие варианты регионов -->
+        </select>
+    </label><br/>
+    <label>Статус:
+        <select th:field="*{status}">
+            <option value="STAZHER">Стажер</option>
+            <option value="PRODAVEC">Продавец</option>
+            <option value="NASTAVNIK">Наставник</option>
+            <!-- Добавьте другие варианты статусов -->
+        </select>
+    </label><br/>
+    <!-- Добавьте другие поля, если необходимо -->
     <button type="submit">Сохранить</button>
 </form>
 <a href="/sellers/list">Вернуться к списку</a>

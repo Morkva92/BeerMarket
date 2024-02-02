@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Редактировать Магазин</title>
+</head>
+<body>
+<h2>Редактировать Магазин</h2>
+<form th:action="@{/shops/edit/{id}(id=${shop.id})}" th:object="${shop}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <label>Название: <input type="text" th:field="*{name}"/></label><br/>
+    <label>Адрес: <input type="text" th:field="*{address}"/></label><br/>
+    <label>Регион:
+        <select th:field="*{region}">
+            <option value="REGION1">Северный регион</option>
+            <option value="REGION2">Южный регион</option>
+            <!-- Добавьте другие варианты регионов -->
+        </select>
+    </label><br/>
+    <!-- Если необходимо, добавьте другие поля -->
+    <button type="submit">Сохранить</button>
+</form>
+<a href="/shops/list">Вернуться к списку</a>
+</body>
+</html>

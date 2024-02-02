@@ -5,7 +5,7 @@
     <title>Edit Regional Director</title>
 </head>
 <body>
-<h2>Изменить Данные Регионального Деректора</h2>
+<h2>Изменить Данные Регионального Директора</h2>
 <form th:action="@{/regionalDirectors/edit/{id}(id=${regionalDirector.id})}" th:object="${regionalDirector}" method="post">
     <input type="hidden" th:field="*{id}"/>
     <label>Имя: <input type="text" th:field="*{firstName}"/></label><br/>
@@ -31,12 +31,22 @@
             <option value="SELLER">Продавец</option>
             <option value="REGIONAL_DIRECTOR">Региональный директор</option>
             <option value="TERRITORIAL_MANAGER">Территориальный менеджер</option>
-
             <!-- Добавьте другие варианты регионов -->
         </select>
     </label><br/>
     <label>Дата рождения: <input type="date" th:field="*{birthDate}" /></label><br/>
-    <button type="submit">СОХРАНИТЬ</button>
+
+    <!-- Добавляем выпадающий список для выбора территориального менеджера -->
+    <label>Территориальный менеджер:
+        <select th:field="*{territorialManagers}">
+            <option value="">Выберите территориального менеджера</option>
+            <!-- Используйте список territorialManagers, который принадлежит объекту RegionalDirector -->
+            <option th:each="manager : ${regionalDirector.territorialManagers}" th:value="${manager.id}" th:text="${manager.firstName + ' ' + manager.lastName}"></option>
+        </select>
+    </label><br/>
+
+
+    <button type="submit">Сохранить</button>
 </form>
 <a href="/regionalDirectors/list">Вернуться к списку</a>
 </body>

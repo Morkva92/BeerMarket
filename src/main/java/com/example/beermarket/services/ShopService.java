@@ -18,6 +18,8 @@ public class ShopService {
         this.shopRepository = shopRepository;
     }
 
+
+
     public List<Shop> getAllShops() {
         return shopRepository.findAll();
     }
@@ -30,7 +32,7 @@ public class ShopService {
         shopRepository.save(shop);
     }
 
-    public void deleteShop(Long id) {
-        shopRepository.deleteById(id);
+
+    public void deleteShopById(Long id) {shopRepository.deleteById(id);
     }
 }

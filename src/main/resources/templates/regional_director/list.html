@@ -2,46 +2,47 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Список Региональных Деректоров</title>
+    <title>Список Региональных Директоров</title>
 </head>
 <body>
-<h2>Список Региональных Деректоров</h2>
+<h2>Список Региональных Директоров</h2>
 <table border="1">
     <tr>
+        <!-- Заголовки столбцов таблицы -->
         <th>ID</th>
         <th>Имя</th>
         <th>Фамилия</th>
-        <th>Отчество</th>
-        <th>Логин</th>
-        <th>Пароль</th>
-        <th>Email</th>
-        <th>Телефон</th>
-        <th>Регион</th>
-        <th>Должность</th>
-        <th>Дата рождения</th>
-
-        <!-- Add more columns if needed -->
-        <th>Actions</th>
+        <!-- Другие заголовки столбцов -->
+        <th>Менеджер</th> <!-- Новый столбец -->
     </tr>
+    <!-- Перебор всех региональных директоров в модели -->
     <tr th:each="director : ${regionalDirectors}">
+        <!-- Данные о каждом региональном директоре -->
         <td th:text="${director.id}"></td>
         <td th:text="${director.firstName}"></td>
         <td th:text="${director.lastName}"></td>
-        <td th:text="${director.middleName}"></td>
-        <td th:text="${director.login}"></td>
-        <td th:text="${director.password}"></td>
-        <td th:text="${director.email}"></td>
-        <td th:text="${director.phone}"></td>
-        <td th:text="${director.region.getDisplayName()}"></td>
-        <td th:text="${director.role.getDisplayName()}"></td>
-        <td th:text="${director.birthDate}"></td>
-        <!-- Add more columns if needed -->
+        <!-- Добавляем выпадающий список для менеджера -->
         <td>
-            <a th:href="@{/regionalDirectors/edit/{id}(id=${director.id})}">Edit</a> |
-            <a th:href="@{/regionalDirectors/delete/{id}(id=${director.id})}">Delete</a>
+            <form th:action="@{'/regionalDirectors/addManager/' + ${director.id}}" method="post">
+                <select name="managerId">
+                    <!-- Перебор всех территориальных менеджеров в модели -->
+                    <option th:each="manager : ${territorialManagers}" th:value="${manager.id}" th:text="${manager.firstName + ' ' + manager.lastName}"></option>
+                </select>
+                <button type="submit">Добавить</button>
+            </form>
+
+
+            <form th:action="@{'/regionalDirectors/removeManager/' + ${director.id}}" method="post">
+                <select name="managerId">
+                    <!-- Перебор всех территориальных менеджеров в модели -->
+                    <option th:each="manager : ${territorialManagers}" th:value="${manager.id}" th:text="${manager.firstName + ' ' + manager.lastName}"></option>
+                </select>
+                <button type="submit">Удалить</button>
+            </form>
+
         </td>
     </tr>
 </table>
-<a href="/regionalDirectors/create">Создать нового Деректора</a>
+<a href="/regionalDirectors/create">Создать нового Директора</a>
 </body>
 </html>

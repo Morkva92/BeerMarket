@@ -5,10 +5,9 @@ import com.example.beermarket.role.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class TerritorialManager {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String login;
@@ -31,6 +30,7 @@ public class TerritorialManager {
     private Region region;
 
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
     @Lob
     private byte[] photo;
@@ -45,40 +45,13 @@ public class TerritorialManager {
     @JoinColumn(name = "regional_director_id")
     private RegionalDirector regionalDirector;
 
-    @OneToMany(mappedBy = "territorialManager", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "territorialManager")
     private List<Seller> sellers;
 
-    @OneToMany(mappedBy = "territorialManager", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "territorialManager")
     private List<Shop> shops;
 
 
 
-    public void addSeller(Seller seller) {
-        if (sellers == null) {
-            sellers = new ArrayList<>();
-        }
-        sellers.add(seller);
-        seller.setTerritorialManager(this);
-    }
 
-    public void removeSeller(Seller seller) {
-        if (sellers != null) {
-            sellers.remove(seller);
-            seller.setTerritorialManager(null);
-        }
-    }
-    public void addShop(Shop shop) {
-        if (shops == null) {
-            shops = new ArrayList<>();
-        }
-        shops.add(shop);
-        shop.setTerritorialManager(this);
-    }
-
-    public void removeShop(Shop shop) {
-        if (shops != null) {
-            shops.remove(shop);
-            shop.setTerritorialManager(null);
-        }
-    }
 }
