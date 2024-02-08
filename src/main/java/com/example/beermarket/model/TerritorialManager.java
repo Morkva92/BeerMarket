@@ -2,12 +2,12 @@ package com.example.beermarket.model;
 
 import com.example.beermarket.role.Region;
 import com.example.beermarket.role.Role;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -41,11 +41,11 @@ public class TerritorialManager {
     private String email;
     private String phone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "regional_director_id")
     private RegionalDirector regionalDirector;
 
-    @OneToMany(mappedBy = "territorialManager")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "territorialManager")
     private List<Seller> sellers;
 
     @OneToMany(mappedBy = "territorialManager")

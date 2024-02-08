@@ -2,20 +2,22 @@ package com.example.beermarket.model;
 
 import com.example.beermarket.role.Region;
 import com.example.beermarket.role.Role;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-@Entity
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class RegionalDirector {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,10 +44,10 @@ public class RegionalDirector {
     private String phone;
 
 
-    @OneToMany(mappedBy = "regionalDirector", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "regionalDirector", fetch = FetchType.LAZY)
     private List<TerritorialManager> territorialManagers;
 
-    @OneToMany(mappedBy = "regionalDirector")
+    @OneToMany(mappedBy = "regionalDirector",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Shop> shops;
 
     public void setTerritorialManager(TerritorialManager territorialManager) {
@@ -62,6 +64,23 @@ public class RegionalDirector {
         }
     }
 
-
-
+    @Override
+    public String toString() {
+        return "RegionalDirector{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", region=" + region +
+                ", birthDate=" + birthDate +
+                ", photo=" + Arrays.toString(photo) +
+                ", role=" + role +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", territorialManagers=" + territorialManagers +
+                ", shops=" + shops +
+                '}';
+    }
 }

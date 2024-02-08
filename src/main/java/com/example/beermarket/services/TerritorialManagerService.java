@@ -1,15 +1,15 @@
 package com.example.beermarket.services;
 
-import com.example.beermarket.model.RegionalDirector;
-import com.example.beermarket.model.Seller;
+
 import com.example.beermarket.model.TerritorialManager;
 import com.example.beermarket.repository.RegionalDirectorRepository;
 import com.example.beermarket.repository.SellerRepository;
 import com.example.beermarket.repository.TerritorialManagerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +21,7 @@ public class TerritorialManagerService {
 
     private final RegionalDirectorRepository regionalDirectorRepository;
 
-    @Autowired
+
     public TerritorialManagerService(
             TerritorialManagerRepository territorialManagerRepository,
             SellerRepository sellerRepository,RegionalDirectorRepository regionalDirectorRepository) {
@@ -31,21 +31,21 @@ public class TerritorialManagerService {
     }
 
 
-
+    @Transactional
     public List<TerritorialManager> getAllTerritorialManagers() {
         return territorialManagerRepository.findAll();
     }
-
+    @Transactional
     public Optional<TerritorialManager> getTerritorialManagerById(Long id) {
         return territorialManagerRepository.findById(id);
     }
-
+    @Transactional
     public void saveTerritorialManager(TerritorialManager territorialManager) {
         territorialManagerRepository.save(territorialManager);
     }
 
 
-
+    @Transactional
     public void deleteTerritorialManagerById(Long id) {territorialManagerRepository.deleteById(id);
     }
 

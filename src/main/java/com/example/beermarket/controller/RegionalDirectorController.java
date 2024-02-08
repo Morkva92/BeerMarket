@@ -4,7 +4,6 @@ import com.example.beermarket.model.RegionalDirector;
 import com.example.beermarket.model.TerritorialManager;
 import com.example.beermarket.services.RegionalDirectorService;
 import com.example.beermarket.services.TerritorialManagerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 
+
+
 @Controller
 @RequestMapping("/regionalDirectors")
 public class RegionalDirectorController {
+
 
     private final RegionalDirectorService regionalDirectorService;
     private final TerritorialManagerService territorialManagerService;
@@ -68,16 +70,17 @@ public class RegionalDirectorController {
         return "redirect:/regionalDirectors/list";
     }
 
-    @PostMapping("/addManager/{directorId}/{managerId}")
-    public String addTerritorialManagerToDirector(@PathVariable Long directorId, @PathVariable Long managerId) {
+    @PostMapping("/addManager/{directorId}")
+    public String addTerritorialManagerToDirector(@PathVariable Long directorId, @RequestParam Long managerId) {
         regionalDirectorService.assignTerritorialManager(directorId, managerId);
         return "redirect:/regionalDirectors/list";
     }
 
-    @GetMapping("/removeManager/{directorId}/{managerId}")
-    public String removeTerritorialManagerFromDirector(@PathVariable Long directorId, @PathVariable Long managerId) {
+
+    @GetMapping("/removeManager/{directorId}")
+    public String removeTerritorialManagerFromDirector(@PathVariable Long directorId, @RequestParam Long managerId) {
         regionalDirectorService.removeTerritorialManagerFromDirector(directorId, managerId);
-        return "redirect:/regionalDirectors/viewManagers/" + directorId;
+        return "redirect:/regionalDirectors/list";
     }
 
 
