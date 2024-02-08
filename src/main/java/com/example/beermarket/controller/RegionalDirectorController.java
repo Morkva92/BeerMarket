@@ -1,8 +1,10 @@
 package com.example.beermarket.controller;
 
 import com.example.beermarket.model.RegionalDirector;
+import com.example.beermarket.model.Shop;
 import com.example.beermarket.model.TerritorialManager;
 import com.example.beermarket.services.RegionalDirectorService;
+import com.example.beermarket.services.ShopService;
 import com.example.beermarket.services.TerritorialManagerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,19 +22,24 @@ public class RegionalDirectorController {
 
     private final RegionalDirectorService regionalDirectorService;
     private final TerritorialManagerService territorialManagerService;
+    private final ShopService shopService;
 
-
-    public RegionalDirectorController(RegionalDirectorService regionalDirectorService, TerritorialManagerService territorialManagerService) {
+    public RegionalDirectorController(RegionalDirectorService regionalDirectorService,
+                                      TerritorialManagerService territorialManagerService,
+                                      ShopService shopService) {
         this.regionalDirectorService = regionalDirectorService;
         this.territorialManagerService = territorialManagerService;
+        this.shopService = shopService;
     }
 
     @GetMapping("/list")
     public String showRegionalDirectors(Model model) {
         List<RegionalDirector> regionalDirectors = regionalDirectorService.getAllRegionalDirectors();
         List<TerritorialManager> territorialManagers = territorialManagerService.getAllTerritorialManagers();
+        List<Shop> shops = shopService.getAllShops();
         model.addAttribute("regionalDirectors", regionalDirectors);
         model.addAttribute("territorialManagers", territorialManagers);
+        model.addAttribute("shops", shops);
         return "regional_director/list";
     }
 
@@ -72,7 +79,7 @@ public class RegionalDirectorController {
 
     @PostMapping("/addManager/{directorId}")
     public String addTerritorialManagerToDirector(@PathVariable Long directorId, @RequestParam Long managerId) {
-        regionalDirectorService.assignTerritorialManager(directorId, managerId);
+        regionalDirectorService.assignTerritorialManagerFromDirector(directorId, managerId);
         return "redirect:/regionalDirectors/list";
     }
 
@@ -82,7 +89,18 @@ public class RegionalDirectorController {
         regionalDirectorService.removeTerritorialManagerFromDirector(directorId, managerId);
         return "redirect:/regionalDirectors/list";
     }
+    @PostMapping("/addShop/{directorId}")
+    public String addShopToDirector(@PathVariable Long directorId, @RequestParam Long shopId) {
+        regionalDirectorService.assignShopFromDirector(directorId, shopId);
+        return "redirect:/regionalDirectors/list";
+    }
 
+
+    @GetMapping("/removeShop/{directorId}")
+    public String removeShopFromDirector(@PathVariable Long directorId, @RequestParam Long shopId) {
+        regionalDirectorService.removeShopFromDirector(directorId, shopId);
+        return "redirect:/regionalDirectors/list";
+    }
 
 
 }

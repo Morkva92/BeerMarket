@@ -63,6 +63,19 @@ public class RegionalDirector {
             territorialManager.setRegionalDirector(null);
         }
     }
+    public void setShop(Shop shop) {
+        if (shops == null) {
+            shops = new ArrayList<>();
+        }
+        shops.add(shop);
+        shop.setRegionalDirector(this);
+    }
+    public void removeShop(Shop shop) {
+        if (shops != null) {
+            shops.remove(shop);
+            shop.setRegionalDirector(null);
+        }
+    }
 
     @Override
     public String toString() {

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,10 +49,22 @@ public class TerritorialManager {
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "territorialManager")
     private List<Seller> sellers;
 
-    @OneToMany(mappedBy = "territorialManager")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "territorialManager")
     private List<Shop> shops;
 
-
+    public void setShop(Shop shop) {
+        if (shops == null) {
+            shops = new ArrayList<>();
+        }
+        shops.add(shop);
+        shop.setTerritorialManager(this);
+    }
+    public void removeShop(Shop shop) {
+        if (shops != null) {
+            shops.remove(shop);
+            shop.setTerritorialManager(null);
+        }
+    }
 
 
 }

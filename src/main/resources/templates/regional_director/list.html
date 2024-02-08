@@ -15,6 +15,7 @@
 
         <!-- Другие заголовки столбцов -->
         <th>Менеджер</th> <!-- Новый столбец -->
+        <th>Магазин</th>
     </tr>
     <!-- Перебор всех региональных директоров в модели -->
     <tr th:each="director : ${regionalDirectors}">
@@ -22,8 +23,6 @@
         <td th:text="${director.id}"></td>
         <td th:text="${director.firstName}"></td>
         <td th:text="${director.lastName}"></td>
-
-
 
         <!-- Добавляем выпадающий список для менеджера -->
         <td>
@@ -48,11 +47,33 @@
                 <!-- Сообщение об успешном удалении -->
                 <p th:if="${param.managerId != null}">Менеджер успешно удален</p>
             </form>
-
-
         </td>
+        <td>
+        <form th:action="@{'/regionalDirectors/addShop/' + ${director.id}}" method="post">
+            <!-- Выпадающий список магазинов -->
+            <select name="shopId">
+                <option th:each="shop : ${shops}" th:value="${shop.id}" th:text="${shop.name+ ' ' + shop.address}"></option>
+            </select>
+            <!-- Кнопка для добавления магазина -->
+            <button type="submit">Добавить</button>
+            <!-- Сообщение об успешном добавлении -->
+            <p th:if="${param.shopId != null}">Магазин успешно добавлен</p>
+        </form>
+
+        <form th:action="@{'/regionalDirectors/removeShop/' + ${director.id}}" method="get">
+            <!-- Выпадающий список менеджеров -->
+            <select name="shopId">
+                <option th:each="shop : ${shops}" th:value="${shop.id}" th:text="${shop.name+ ' ' + shop.address}"></option>
+            </select>
+            <!-- Кнопка для удаления менеджера -->
+            <button type="submit">Удалить</button>
+            <!-- Сообщение об успешном удалении -->
+            <p th:if="${param.shopId != null}">Менеджер успешно удален</p>
+        </form>
+    </td>
     </tr>
 </table>
 <a href="/regionalDirectors/create">Создать нового Директора</a>
+<br><a href="/admin">Админ панель</a><br/>
 </body>
 </html>
