@@ -46,10 +46,10 @@ public class TerritorialManager {
     @JoinColumn(name = "regional_director_id")
     private RegionalDirector regionalDirector;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "territorialManager")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "territorialManager",fetch = FetchType.LAZY)
     private List<Seller> sellers;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "territorialManager")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "territorialManager",fetch = FetchType.LAZY)
     private List<Shop> shops;
 
     public void setShop(Shop shop) {

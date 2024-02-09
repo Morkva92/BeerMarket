@@ -9,8 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
-import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Date;
 
 @Entity
@@ -54,6 +53,24 @@ public class Seller {
     private Shop shop;
 
 
-
-
+    @Override
+    public String toString() {
+        return "Seller{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", region=" + region +
+                ", birthDate=" + birthDate +
+                ", photo=" + Arrays.toString(photo) +
+                ", role=" + role +
+                ", status=" + status +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", territorialManager=" + territorialManager +
+                ", shop=" + shop +
+                '}';
+    }
 }

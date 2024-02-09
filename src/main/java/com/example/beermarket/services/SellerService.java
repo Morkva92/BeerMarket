@@ -34,10 +34,7 @@ public class SellerService {
     public void deleteSellerById(Long id) {
         sellerRepository.deleteById(id);
     }
-    @Transactional
-    public List<Seller> findByFirstName(String name) {
-        return sellerRepository.findByFirstName(name);
-    }
+
 
 
 }

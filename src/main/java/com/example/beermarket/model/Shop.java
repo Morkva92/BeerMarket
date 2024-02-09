@@ -33,11 +33,11 @@ public class Shop {
     @JoinColumn(name = "territorial_manager_id")
     private TerritorialManager territorialManager;
 
-    @OneToMany(mappedBy = "shop")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "shop",fetch = FetchType.LAZY)
     private List<Seller> sellers;
 
 
-    public void addSeller(Seller seller) {
+    public void setSeller(Seller seller) {
         if (sellers == null) {
             sellers = new ArrayList<>();
         }
@@ -52,7 +52,18 @@ public class Shop {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return "Shop{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", region=" + region +
+                ", regionalDirector=" + regionalDirector +
+                ", territorialManager=" + territorialManager +
+                ", sellers=" + sellers +
+                '}';
+    }
 }
 
 
