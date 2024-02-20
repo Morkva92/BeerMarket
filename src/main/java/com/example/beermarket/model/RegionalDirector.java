@@ -2,12 +2,13 @@ package com.example.beermarket.model;
 
 import com.example.beermarket.role.Region;
 import com.example.beermarket.role.Role;
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,6 +77,8 @@ public class RegionalDirector {
             shop.setRegionalDirector(null);
         }
     }
+
+
 
     @Override
     public String toString() {

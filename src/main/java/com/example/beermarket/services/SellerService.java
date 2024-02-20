@@ -1,5 +1,6 @@
 package com.example.beermarket.services;
 
+import com.example.beermarket.model.RegionalDirector;
 import com.example.beermarket.model.Seller;
 import com.example.beermarket.repository.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,11 @@ public class SellerService {
         sellerRepository.deleteById(id);
     }
 
-
+    public Seller findByFirstNameAndLastNameAndMiddleName(String firstName, String lastName, String middleName) {
+        return sellerRepository.findByFirstNameAndLastNameAndMiddleName(firstName, lastName, middleName);
+    }
+    public Seller findByLogin(String login) {
+        return sellerRepository.findByLogin(login);
+    }
 
 }

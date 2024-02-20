@@ -3,12 +3,13 @@ package com.example.beermarket.model;
 import com.example.beermarket.role.Region;
 import com.example.beermarket.role.Role;
 import com.example.beermarket.role.SellerStatus;
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -51,6 +52,8 @@ public class Seller {
     @ManyToOne
     @JoinColumn(name = "shop_id")
     private Shop shop;
+
+
 
 
     @Override

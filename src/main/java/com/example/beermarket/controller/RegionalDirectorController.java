@@ -6,6 +6,7 @@ import com.example.beermarket.model.TerritorialManager;
 import com.example.beermarket.services.RegionalDirectorService;
 import com.example.beermarket.services.ShopService;
 import com.example.beermarket.services.TerritorialManagerService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,13 +24,15 @@ public class RegionalDirectorController {
     private final RegionalDirectorService regionalDirectorService;
     private final TerritorialManagerService territorialManagerService;
     private final ShopService shopService;
+    private final PasswordEncoder passwordEncoder;
 
     public RegionalDirectorController(RegionalDirectorService regionalDirectorService,
                                       TerritorialManagerService territorialManagerService,
-                                      ShopService shopService) {
+                                      ShopService shopService,PasswordEncoder passwordEncoder) {
         this.regionalDirectorService = regionalDirectorService;
         this.territorialManagerService = territorialManagerService;
         this.shopService = shopService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/list")
@@ -54,9 +57,13 @@ public class RegionalDirectorController {
 
     @PostMapping("/create")
     public String createRegionalDirector(@ModelAttribute RegionalDirector regionalDirector) {
+        // Кодирование пароля перед сохранением
+        String encodedPassword = passwordEncoder.encode(regionalDirector.getPassword());
+        regionalDirector.setPassword(encodedPassword);
         regionalDirectorService.saveRegionalDirector(regionalDirector);
         return "redirect:/regionalDirectors/list";
     }
+
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
@@ -67,6 +74,9 @@ public class RegionalDirectorController {
 
     @PostMapping("/edit/{id}")
     public String editRegionalDirector(@PathVariable Long id, @ModelAttribute RegionalDirector updatedRegionalDirector) {
+        // Кодирование пароля перед сохранением
+        String encodedPassword = passwordEncoder.encode(updatedRegionalDirector.getPassword());
+        updatedRegionalDirector.setPassword(encodedPassword);
         regionalDirectorService.saveRegionalDirector(updatedRegionalDirector);
         return "redirect:/regionalDirectors/list";
     }

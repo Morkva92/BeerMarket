@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RegionalDirectorRepository extends JpaRepository<RegionalDirector, Long> {
 
+    RegionalDirector findByLogin(String username);
 }

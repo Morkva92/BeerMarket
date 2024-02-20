@@ -2,6 +2,7 @@ package com.example.beermarket.services;
 
 
 
+import com.example.beermarket.model.RegionalDirector;
 import com.example.beermarket.model.Shop;
 import com.example.beermarket.model.TerritorialManager;
 import com.example.beermarket.repository.RegionalDirectorRepository;
@@ -9,11 +10,12 @@ import com.example.beermarket.repository.SellerRepository;
 import com.example.beermarket.repository.ShopRepository;
 import com.example.beermarket.repository.TerritorialManagerRepository;
 
-import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,5 +89,11 @@ public class TerritorialManagerService {
             throw new EntityNotFoundException("Региональный директор или территориальный менеджер не найден при удалении");
         }
     }
+    public TerritorialManager findByFirstNameAndLastNameAndMiddleName(String firstName, String lastName, String middleName) {
+        return territorialManagerRepository.findByFirstNameAndLastNameAndMiddleName(firstName, lastName, middleName);
+    }
 
+    public TerritorialManager findByLogin(String login) {
+        return territorialManagerRepository.findByLogin(login);
+    }
 }

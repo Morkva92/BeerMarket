@@ -6,10 +6,11 @@ import com.example.beermarket.model.TerritorialManager;
 import com.example.beermarket.repository.RegionalDirectorRepository;
 import com.example.beermarket.repository.ShopRepository;
 import com.example.beermarket.repository.TerritorialManagerRepository;
-import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -116,6 +117,9 @@ public class RegionalDirectorService {
         }
     }
 
+    public RegionalDirector findByLogin(String login) {
 
+        return regionalDirectorRepository.findByLogin(login);
+    }
 }
 

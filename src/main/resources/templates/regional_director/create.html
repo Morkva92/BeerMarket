@@ -6,7 +6,8 @@
 </head>
 <body>
 <h2>Создать Регионального Директора</h2>
-<form th:action="@{/regionalDirectors/create}" th:object="${regionalDirector}" method="post">
+<form th:action="@{/regionalDirectors/create}" th:object="${regionalDirector}" method="post" enctype="multipart/form-data">
+    <label>Фото: <input type="file" name="photo"/></label><br/>
     <label>Имя: <input type="text" th:field="*{firstName}"/></label><br/>
     <label>Фамилия: <input type="text" th:field="*{lastName}"/></label><br/>
     <label>Отчество: <input type="text" th:field="*{middleName}"/></label><br/>

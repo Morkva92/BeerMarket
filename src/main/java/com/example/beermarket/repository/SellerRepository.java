@@ -8,6 +8,8 @@ import java.util.List;
 
 @Repository
 public interface SellerRepository extends JpaRepository<Seller, Long> {
+    Seller findByFirstName(String firstName);
+   Seller findByFirstNameAndLastNameAndMiddleName(String firstName, String lastName, String middleName);
 
-
+    Seller findByLogin(String username);
 }

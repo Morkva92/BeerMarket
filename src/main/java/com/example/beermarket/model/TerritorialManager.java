@@ -2,12 +2,13 @@ package com.example.beermarket.model;
 
 import com.example.beermarket.role.Region;
 import com.example.beermarket.role.Role;
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,6 +52,9 @@ public class TerritorialManager {
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "territorialManager",fetch = FetchType.LAZY)
     private List<Shop> shops;
+
+
+
 
     public void setShop(Shop shop) {
         if (shops == null) {

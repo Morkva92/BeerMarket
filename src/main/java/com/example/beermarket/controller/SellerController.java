@@ -3,6 +3,7 @@ package com.example.beermarket.controller;
 import com.example.beermarket.model.Seller;
 import com.example.beermarket.services.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +16,13 @@ import java.util.Optional;
 public class SellerController {
 
     private final SellerService sellerService;
+    private final PasswordEncoder passwordEncoder;
 
 
-    public SellerController(SellerService sellerService) {
+
+    public SellerController(SellerService sellerService, PasswordEncoder passwordEncoder) {
         this.sellerService = sellerService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/list")
@@ -36,10 +40,11 @@ public class SellerController {
 
     @PostMapping("/create")
     public String createSeller(@ModelAttribute Seller seller) {
+        String encodedPassword = passwordEncoder.encode(seller.getPassword());
+        seller.setPassword(encodedPassword);
         sellerService.saveSeller(seller);
         return "redirect:/sellers/list";
     }
-
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
         Optional<Seller> seller = sellerService.getSellerById(id);
@@ -49,6 +54,8 @@ public class SellerController {
 
     @PostMapping("/edit/{id}")
     public String editSeller(@PathVariable Long id, @ModelAttribute Seller updatedSeller) {
+        String encodedPassword = passwordEncoder.encode(updatedSeller.getPassword());
+        updatedSeller.setPassword(encodedPassword);
         sellerService.saveSeller(updatedSeller);
         return "redirect:/sellers/list";
     }

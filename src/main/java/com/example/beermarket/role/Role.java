@@ -14,6 +14,9 @@ public enum Role {
     Role(String displayName) {
         this.displayName = displayName;
     }
-
+    @Override
+    public String toString() {
+        return "ROLE_" + name();
+    }
 }
 
