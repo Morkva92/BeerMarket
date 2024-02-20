@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Regional Director Profile</title>
+    <style>
+        /* Добавьте свои стили здесь */
+    </style>
+</head>
+<body>
+<h2>Regional Director Profile</h2>
+<p th:text="'Имя: ' + ${regionalDirector.firstName}"></p>
+<p th:text="'Фамилия: ' + ${regionalDirector.lastName}"></p>
+<p th:text="'Регион: ' + ${regionalDirector.region.getDisplayName()}"></p>
+<p th:text="'Email: ' + ${regionalDirector.email}"></p>
+
+<!-- Территориальные менеджеры -->
+<h3>Территориальные менеджеры:</h3>
+<ul>
+    <li th:each="manager : ${regionalDirector.territorialManagers}">
+        <span th:text="${manager.firstName + ' ' + manager.lastName}"></span>
+        <!-- Магазины, привязанные к территориальному менеджеру -->
+        <ul>
+            <li th:each="shop : ${manager.shops}">
+                <span th:text="${shop.name}"></span>
+                <!-- Продавцы в магазине -->
+                <ul>
+                    <li th:each="seller : ${shop.sellers}">
+                        <span th:text="${seller.firstName + ' ' + seller.lastName}"></span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<!-- Добавьте другие поля профиля, которые хотите отобразить -->
+</body>
+</html>

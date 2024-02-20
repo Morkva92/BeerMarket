@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Список Магазинов</title>
+</head>
+<body>
+<h2>Список Магазинов</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Адрес</th>
+        <th>Регион</th>
+        <!-- Добавьте другие заголовки, если необходимо -->
+        <th>Действия</th>
+        <th>Продавец</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="shop : ${shops}">
+        <td th:text="${shop.id}"></td>
+        <td th:text="${shop.name}"></td>
+        <td th:text="${shop.address}"></td>
+        <td th:text="${shop.region.getDisplayName()}"></td>
+        <!-- Добавьте другие поля, если необходимо -->
+        <td>
+            <a th:href="@{/shops/edit/{id}(id=${shop.id})}">Редактировать</a>
+            <a th:href="@{/shops/delete/{id}(id=${shop.id})}">Удалить</a>
+        </td>
+        <td>
+            <form th:action="@{'/shops/addSeller/' + ${shop.id}}" method="post">
+                <!-- Выпадающий список магазинов -->
+                <select name="sellerId">
+                    <option th:each="seller : ${sellers}" th:value="${seller.id}" th:text="${seller.firstName+ ' ' + seller.lastName}"></option>
+                </select>
+                <!-- Кнопка для добавления магазина -->
+                <button type="submit">Добавить</button>
+                <!-- Сообщение об успешном добавлении -->
+                <p th:if="${param.sellerId != null}">Магазин успешно добавлен</p>
+            </form>
+
+            <form th:action="@{'/shops/removeSeller/' + ${shop.id}}" method="get">
+                <!-- Выпадающий список менеджеров -->
+                <select name="sellerId">
+                    <option th:each="seller : ${sellers}" th:value="${seller.id}" th:text="${seller.firstName+ ' ' + seller.lastName}"></option>
+                </select>
+                <!-- Кнопка для удаления менеджера -->
+                <button type="submit">Удалить</button>
+                <!-- Сообщение об успешном удалении -->
+                <p th:if="${param.sellerId != null}">Менеджер успешно удален</p>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/shops/create">Создать новый магазин</a>
+<br><a href="/admin">Админ панель</a><br/>
+</body>
+</html>

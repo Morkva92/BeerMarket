@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Редактировать Территориального Менеджера</title>
+</head>
+<body>
+<h2>Редактировать Территориального Менеджера</h2>
+<form th:action="@{/territorialManagers/edit/{id}(id=${territorialManager.id})}" th:object="${territorialManager}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <label>Имя: <input type="text" th:field="*{firstName}"/></label><br/>
+    <label>Фамилия: <input type="text" th:field="*{lastName}"/></label><br/>
+    <label>Отчество: <input type="text" th:field="*{middleName}"/></label><br/>
+    <label>Login: <input type="text" th:field="*{login}"/></label><br/>
+    <label>Password: <input type="password" th:field="*{password}"/></label><br/>
+    <label>Email: <input type="email" th:field="*{email}"/></label><br/>
+    <label>Телефон: <input type="text" th:field="*{phone}"/></label><br/>
+    <label>Регион:
+        <select th:field="*{region}">
+            <option value="REGION1">Северный регион</option>
+            <option value="REGION2">Южный регион</option>
+            <!-- Добавьте другие варианты регионов -->
+        </select>
+    </label><br/>
+    <!-- Если необходимо, добавьте другие поля -->
+    <button type="submit">Сохранить</button>
+</form>
+<a href="/territorialManagers/list">Вернуться к списку</a>
+<br><a href="/admin">Админ панель</a><br/>
+</body>
+</html>

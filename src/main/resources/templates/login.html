@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<h1>Login</h1>
+<form action="/j_spring_security_check" method="post">
+    <label for="j_login">Username:</label><br>
+    <input type="text" id="j_login" name="j_login"><br>
+    <label for="j_password">Password:</label><br>
+    <input type="password" id="j_password" name="j_password"><br><br>
+    <input type="submit" value="Login">
+</form>
+<p th:if="${param.error}">
+    Invalid username or password. Please try again.
+</p>
+<p th:if="${param.logout}">
+    You have been logged out successfully.
+</p>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Создать Территориального Менеджера</title>
+</head>
+<body>
+<h2>Создать Территориального Менеджера</h2>
+<form th:action="@{/territorialManagers/create}" th:object="${territorialManager}" method="post">
+    <label>Имя: <input type="text" th:field="*{firstName}"/></label><br/>
+    <label>Фамилия: <input type="text" th:field="*{lastName}"/></label><br/>
+    <label>Отчество: <input type="text" th:field="*{middleName}"/></label><br/>
+    <label>Login: <input type="text" th:field="*{login}"/></label><br/>
+    <label>Password: <input type="password" th:field="*{password}"/></label><br/>
+    <label>Email: <input type="email" th:field="*{email}"/></label><br/>
+    <label>Телефон: <input type="text" th:field="*{phone}"/></label><br/>
+    <label>Регион:
+        <select th:field="*{region}">
+            <option value="REGION1">Северный регион</option>
+            <option value="REGION2">Южный регион</option>
+            <option value="REGION3">Центральный регион</option>
+            <option value="REGION4">Западный регион</option>
+            <option value="REGION5">Восточный регион</option>
+            <!-- Добавьте другие варианты регионов -->
+        </select>
+    </label><br/>
+    <label>Должность:
+        <select th:field="*{role}">
+            <option value="ADMIN">Администратор</option>
+            <option value="SELLER">Продавец</option>
+            <option value="REGIONAL_DIRECTOR">Региональный директор</option>
+            <option value="TERRITORIAL_MANAGER">Территориальный менеджер</option>
+            <!-- Добавьте другие варианты регионов -->
+        </select>
+    </label><br/>
+    <label>Дата рождения: <input type="date" th:field="*{birthDate}" /></label><br/>
+    <!-- Если необходимо, добавьте другие поля -->
+    <button type="submit">Создать</button>
+</form>
+<a href="/territorialManagers/list">Вернуться к списку</a>
+<br><a href="/admin">Админ панель</a><br/>
+</body>
+</html>

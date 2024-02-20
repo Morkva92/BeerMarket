@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Административная панель</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        h3 {
+            margin-top: 40px;
+            margin-bottom: 10px;
+        }
+        a {
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<h2>Административная панель</h2>
+
+<h3>Региональные директора</h3>
+<a href="/regionalDirectors/create">Создать нового регионального директора</a>
+<a href="/regionalDirectors/list">Список региональных директоров</a>
+
+<h3>Территориальные менеджеры</h3>
+<a href="/territorialManagers/create">Создать нового территориального менеджера</a>
+<a href="/territorialManagers/list">Список территориальных менеджеров</a>
+
+<h3>Продавцы</h3>
+<a href="/sellers/create">Создать нового продавца</a>
+<a href="/sellers/list">Список продавцов</a>
+
+<h3>Магазины</h3>
+<a href="/shops/create">Создать новый магазин</a>
+<a href="/shops/list">Список магазинов</a>
+</body>
+</html>

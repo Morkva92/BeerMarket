@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Список Территориальных Менеджеров</title>
+</head>
+<body>
+<h2>Список Территориальных Менеджеров</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Отчество</th>
+        <!-- Добавьте другие заголовки, если необходимо -->
+        <th>Действия</th>
+        <th>Магазин</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="territorialManager : ${territorialManagers}">
+        <td th:text="${territorialManager.id}"></td>
+        <td th:text="${territorialManager.firstName}"></td>
+        <td th:text="${territorialManager.lastName}"></td>
+        <td th:text="${territorialManager.middleName}"></td>
+        <!-- Добавьте другие поля, если необходимо -->
+        <td>
+            <a th:href="@{/territorialManagers/edit/{id}(id=${territorialManager.id})}">Редактировать</a>
+            <a th:href="@{/territorialManagers/delete/{id}(id=${territorialManager.id})}">Удалить</a>
+        </td>
+        <td>
+            <form th:action="@{'/territorialManagers/addShop/' + ${territorialManager.id}}" method="post">
+                <!-- Выпадающий список магазинов -->
+                <select name="shopId">
+                    <option th:each="shop : ${shops}" th:value="${shop.id}" th:text="${shop.name+ ' ' + shop.address}"></option>
+                </select>
+                <!-- Кнопка для добавления магазина -->
+                <button type="submit">Добавить</button>
+                <!-- Сообщение об успешном добавлении -->
+                <p th:if="${param.shopId != null}">Магазин успешно добавлен</p>
+            </form>
+
+            <form th:action="@{'/territorialManagers/removeShop/' + ${territorialManager.id}}" method="get">
+                <!-- Выпадающий список менеджеров -->
+                <select name="shopId">
+                    <option th:each="shop : ${shops}" th:value="${shop.id}" th:text="${shop.name+ ' ' + shop.address}"></option>
+                </select>
+                <!-- Кнопка для удаления менеджера -->
+                <button type="submit">Удалить</button>
+                <!-- Сообщение об успешном удалении -->
+                <p th:if="${param.shopId != null}">Менеджер успешно удален</p>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/territorialManagers/create">Создать нового территориального менеджера</a>
+<br><a href="/admin">Админ панель</a><br/>
+</body>
+</html>
